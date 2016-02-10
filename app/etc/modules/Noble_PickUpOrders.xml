@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Noble_PickUpOrders>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Noble_PickUpOrders>
+    </modules>
+</config>
