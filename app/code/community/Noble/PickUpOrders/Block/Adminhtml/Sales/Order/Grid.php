@@ -5,30 +5,20 @@
  * @package      Noble_PickUpOrders
  * @author       Gilles Lesire
  *
- * Class Noble_PickUpOrders_Block_Sales_Order_Grid
+ * Class Noble_PickUpOrders_Block_Adminthtml_Sales_Order_Grid
  * This class overrides the default orders grid in the Admin panel
  */
-class Noble_PickUpOrders_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Noble_PickUpOrders_Block_Adminthtml_Sales_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->setId('pickup_orders_grid');
+        $this->setId('noble_pickuporders_grid');
         $this->setUseAjax(true);
         $this->setDefaultSort('increment_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
-    }
-
-    /**
-     * Retrieve collection class
-     *
-     * @return string
-     */
-    protected function _getCollectionClass()
-    {
-        return 'sales/order_grid_collection';
     }
 
     protected function _prepareCollection()
@@ -38,9 +28,7 @@ class Noble_PickUpOrders_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Wid
 		$shippingFields = array();
 		$paymentFields = array();
 		
-		if(Mage::getStoreConfig('noble/extended_columns/shipping_method')) {
-			$orderFields["shipping_method"] = "shipping_method";
-		}
+		$orderFields["shipping_method"] = "shipping_method";
 		
 		if(Mage::getStoreConfig('noble/extended_columns/customer_email')) {
 			$orderFields["customer_email"] = "customer_email";
@@ -103,7 +91,7 @@ class Noble_PickUpOrders_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Wid
 		}
 		
         $collection = Mage::getResourceModel($this->_getCollectionClass());
-        $collection->getSelect()->join(Mage::getConfig()->getTablePrefix() . 'sales_flat_order as sfo', 'sfo.entity_id=`main_table`.entity_id', $orderFields)
+        $collection->getSelect()->join(Mage::getConfig()->getTablePrefix() . 'sales_flat_order as sfo', 'sfo.entity_id=`main_table`.entity_id and sfo.shipping_method="freeshipping_freeshipping"', $orderFields)
 			->join(Mage::getConfig()->getTablePrefix() . 'sales_flat_order_address as sfoba', 'sfoba.parent_id=`main_table`.entity_id and sfoba.address_type = "billing"', $billingFields)
 			->join(Mage::getConfig()->getTablePrefix() . 'sales_flat_order_address as sfosa', 'sfosa.parent_id=`main_table`.entity_id and sfosa.address_type = "shipping"', $shippingFields)
 			->join(Mage::getConfig()->getTablePrefix() . 'sales_flat_order_payment as sfop', 'sfop.parent_id=`main_table`.entity_id', $paymentFields);
@@ -114,6 +102,7 @@ class Noble_PickUpOrders_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Wid
 
     protected function _prepareColumns()
     {
+		$helper = Mage::helper('noble_pickuporders');
 		
 		if(Mage::getStoreConfig('noble/default_columns/real_order_id')) {
 			$this->addColumn('real_order_id', array(
@@ -383,8 +372,8 @@ class Noble_PickUpOrders_Block_Sales_Order_Grid extends Mage_Adminhtml_Block_Wid
 		
         $this->addRssList('rss/order/new', Mage::helper('sales')->__('New Order RSS'));
 
-        $this->addExportType('*/*/exportNobleCsv', Mage::helper('sales')->__('CSV'));
-        $this->addExportType('*/*/exportNobleExcel', Mage::helper('sales')->__('Excel XML'));
+        $this->addExportType('*/*/exportNobleCsv', $helper->__('CSV'));
+        $this->addExportType('*/*/exportNobleExcel', $helper->__('Excel XML'));
 
         return parent::_prepareColumns();
     }
