@@ -11,7 +11,7 @@ class Noble_PickUpOrders_Adminhtml_OrderController extends Mage_Adminhtml_Contro
 {
     public function indexAction()
     {
-        $this->_title($this->__('Sales'))->_title($this->__('Afhaalbestellingen'));
+        $this->_title($this->__('Sales'))->_title($this->__('Afhaalorders'));
         $this->loadLayout();
         $this->_setActiveMenu('sales/sales');
         $this->_addContent($this->getLayout()->createBlock('noble_pickuporders/adminhtml_sales_order'));

@@ -8,7 +8,7 @@
  * Class Noble_PickUpOrders_Block_Adminthtml_Sales_Order_Grid
  * This class overrides the default orders grid in the Admin panel
  */
-class Noble_PickUpOrders_Block_Adminthtml_Sales_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Noble_PickUpOrders_Block_Adminhtml_Sales_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
     public function __construct()
@@ -19,6 +19,16 @@ class Noble_PickUpOrders_Block_Adminthtml_Sales_Order_Grid extends Mage_Adminhtm
         $this->setDefaultSort('increment_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
+    }
+
+    /**
+     * Retrieve collection class
+     *
+     * @return string
+     */
+    protected function _getCollectionClass()
+    {
+        return 'sales/order_grid_collection';
     }
 
     protected function _prepareCollection()

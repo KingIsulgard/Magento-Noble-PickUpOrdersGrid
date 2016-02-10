@@ -5,7 +5,7 @@
             <children>
                 <noble_pickuporders translate="title" module="noble_pickuporders">
                     <sort_order>11</sort_order>
-                    <title>Afhaalbestellingen</title>
+                    <title>Afhaalorders</title>
                     <action>adminhtml/order/</action>
                 </noble_pickuporders>
             </children>
