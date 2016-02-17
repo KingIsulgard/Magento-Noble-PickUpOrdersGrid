@@ -4,10 +4,10 @@
  * @package      Noble_PickUpOrders
  * @author       Gilles Lesire
  *
- * Class Noble_PickUpOrders_Adminhtml_OrderController
+ * Class Noble_PickUpOrders_Adminhtml_PickuporderController
  * Controller for the designated order grid
  */
-class Noble_PickUpOrders_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Action
+class Noble_PickUpOrders_Adminhtml_PickuporderController extends Mage_Adminhtml_Controller_Action
 {
     public function indexAction()
     {

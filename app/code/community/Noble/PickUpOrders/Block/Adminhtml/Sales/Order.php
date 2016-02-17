@@ -14,7 +14,7 @@ class Noble_PickUpOrders_Block_Adminhtml_Sales_Order extends Mage_Adminhtml_Bloc
     {
         $this->_blockGroup = 'noble_pickuporders';
         $this->_controller = 'adminhtml_sales_order';
-        $this->_headerText = Mage::helper('noble_pickuporders')->__('Afhaalbestellingen');
+        $this->_headerText = Mage::helper('noble_pickuporders')->__('Afhaalorders');
  
         parent::__construct();
         $this->_removeButton('add');
