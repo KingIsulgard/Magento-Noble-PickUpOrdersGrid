@@ -41,6 +41,10 @@ class Noble_PickUpOrders_Block_Adminhtml_Sales_Order_Grid extends Mage_Adminhtml
 		
 		$orderFields["shipping_method"] = "shipping_method";
 		
+		if(Mage::getStoreConfig('noble/extended_columns/shipping_description')) {
+			$orderFields["shipping_description"] = "shipping_description";
+		}
+		
 		if(Mage::getStoreConfig('noble/extended_columns/customer_email')) {
 			$orderFields["customer_email"] = "customer_email";
 		}
@@ -231,6 +235,13 @@ class Noble_PickUpOrders_Block_Adminhtml_Sales_Order_Grid extends Mage_Adminhtml
 				'type'      =>  'options',
 				'options'   =>  $this->getCustomerGroupOptions(),
 				'renderer' => 'Noble_AdminOrderGrid_Block_Sales_Order_Grid_Renderer_CustomerGroup'
+			));
+		}
+		
+		if(Mage::getStoreConfig('noble/extended_columns/shipping_description')) {
+			$this->addColumn('shipping_description', array(
+				'header' => $this->__('Shipping Description'),
+				'index' => 'shipping_description'
 			));
 		}
 		
